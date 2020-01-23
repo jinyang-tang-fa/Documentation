@@ -30,3 +30,14 @@ Here is the cicd stack that we deployed our master branch (`Tier` is `developmen
 	```
 	You should get the performances data back as follows:
 	![Test API in Terminal](TestApiInTerminal.png)
+
+- **Archiving process**
+	1. Before the API gateway giving back the response data, it will push those data to [SQS queue]() and our archiver function []() will be triggered to receive messages from SQS queue and archive to [CPSArchiveBucket]()
+	2. Go to [CPSArchiveBucket](), you should find the archiving data under the path of `/archives/date=$date/$accountUUID/$timestamp.json` as follows:
+	![Archive Bucket](ArchiveBucket.png)
+	3. And the json file will look like this:
+	![Archive Data file](ArchiveDataFile.png)
+ 
+### Test Data Generator
+
+In order to test the whole workflow, we have a `testDataGenerator` module in CPS which can generate realistic looking Raw Env file. Please refer to the [README](https://github.com/FutureAdvisor/CPS/blob/master/testDataGenerator/README.md) file on how to generate testing data.
